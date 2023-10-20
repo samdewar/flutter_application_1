@@ -7,19 +7,26 @@ void main() async {
 
 
   // Create a MongoDB connection pool
-  Db db;
+  // Db db;
 
-  db = await Db.create(connection);
+  var db = await Db.create("$connection/sample_airbnb");
 
   // Open the database connection
   await db.open();
 
   // Get a collection (replace 'your_collection_name' with your actual collection name)
-  final collection = db.collection('your_collection_name');
+
+var collection = await db.collection("listingsAndReviews");
 
   // Perform database operations
-  var result = await collection.find(where.eq('key', 'value')).toList();
-  print('Query Result: $result');
+var result = await collection.find({'name':'Horto flat with small garden'}).toList();
+print(result);
+
+// print('Found document: $result');
+
+
+
+
 
   // Close the database connection
   await db.close();
