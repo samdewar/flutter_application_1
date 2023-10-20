@@ -1,15 +1,15 @@
 //
 import 'package:mongo_dart/mongo_dart.dart';
 
+import 'credentials.dart';
 void main() async {
   // MongoDB Atlas connection details
-  final String dbName = 'your_database_name';
-  final String username = 'your_username';
-  final String password = 'your_password';
-  final String clusterUrl = 'your_cluster_url';
+
 
   // Create a MongoDB connection pool
-  final db = Db('mongodb+srv://$username:$password@$clusterUrl/$dbName');
+  Db db;
+
+  db = await Db.create(connection);
 
   // Open the database connection
   await db.open();
