@@ -1,7 +1,9 @@
 //
 import 'package:mongo_dart/mongo_dart.dart';
-
 import 'credentials.dart';
+import 'dart:convert';
+import 'dart:io';
+
 class connect {
 
   Future<void> query() async {
@@ -21,14 +23,20 @@ class connect {
 
     // Perform database operations
     var result = await collection
-        .find({'name': 'Horto flat with small garden'}).toList();
+        .findOne({'name': 'Horto flat with small garden'});
     // print(result);
-    data = result;
+    // data = result;
+    _handleJson(result);
   // Close the database connection
     await db.close();
 
   }
 
+  Future<void> _handleJson(var input) async{
+    // Map<String, dynamic> output = jsonDecode(input);
+    String jsonData = input['name'];
+    data=jsonData;
+  }
   var data;
     
 }
