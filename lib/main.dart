@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
-
-void main() {
+import 'connect.dart';
+var mongo = new getFromMongo();
+String data="null";
+Future<void> main() async{
+    
+  await mongo.connectAndQuery();
   runApp(const MyApp());
+}
+
+class getFromMongo{
+
+  Future<void> connectAndQuery() async{
+    var conn = new connect();
+    await conn.query();
+
+    print(conn.data);
+    data=conn.data.toString();
+
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +47,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: '$data'),
     );
   }
 }
